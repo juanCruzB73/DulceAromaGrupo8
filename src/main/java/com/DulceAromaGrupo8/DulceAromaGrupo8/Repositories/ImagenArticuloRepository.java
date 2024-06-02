@@ -1,4 +1,4 @@
-package com.DulceAromaGrupo8.DulceAromaGrupo8.repositories;
+package com.DulceAromaGrupo8.DulceAromaGrupo8.Repositories;
 
 
 import com.DulceAromaGrupo8.DulceAromaGrupo8.entities.ImagenArticulo;
