@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Builder;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.envers.Audited;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@SuperBuilder
 
 public class Articulo extends Base {
 
