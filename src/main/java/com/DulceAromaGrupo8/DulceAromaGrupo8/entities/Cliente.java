@@ -1,8 +1,5 @@
 package com.DulceAromaGrupo8.DulceAromaGrupo8.entities;
 
-import com.DulceAromaGrupo8.DulceAromaGrupo8.entities.enums.Estado;
-import com.DulceAromaGrupo8.DulceAromaGrupo8.entities.enums.Rol;
-
 import java.time.LocalDate;
 
 public class Cliente {

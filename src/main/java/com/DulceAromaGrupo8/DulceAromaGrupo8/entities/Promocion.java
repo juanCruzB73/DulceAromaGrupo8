@@ -1,6 +1,6 @@
 package com.DulceAromaGrupo8.DulceAromaGrupo8.entities;
 
-import com.DulceAromaGrupo8.DulceAromaGrupo8.entities.enums.TipoPromocion;
+import com.DulceAromaGrupo8.DulceAromaGrupo8.enums.TipoPromocion;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

@@ -2,6 +2,7 @@ package com.DulceAromaGrupo8.DulceAromaGrupo8.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,9 +12,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-@Getter
-@Setter
+@SuperBuilder
 
 public class ArticuloManufacturado extends Articulo {
 
