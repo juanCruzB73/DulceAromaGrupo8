@@ -1,8 +1,8 @@
 package com.DulceAromaGrupo8.DulceAromaGrupo8.entities;
 
-import com.DulceAromaGrupo8.DulceAromaGrupo8.entities.enums.Estado;
-import com.DulceAromaGrupo8.DulceAromaGrupo8.entities.enums.FormaPago;
-import com.DulceAromaGrupo8.DulceAromaGrupo8.entities.enums.TipoEnvio;
+import com.DulceAromaGrupo8.DulceAromaGrupo8.enums.Estado;
+import com.DulceAromaGrupo8.DulceAromaGrupo8.enums.FormaPago;
+import com.DulceAromaGrupo8.DulceAromaGrupo8.enums.TipoEnvio;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

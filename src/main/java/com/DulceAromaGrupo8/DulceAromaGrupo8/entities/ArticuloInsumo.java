@@ -16,7 +16,6 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 
 public class ArticuloInsumo extends Articulo{
 

@@ -1,8 +1,7 @@
 package com.DulceAromaGrupo8.DulceAromaGrupo8.entities;
 
-import com.DulceAromaGrupo8.DulceAromaGrupo8.entities.enums.FormaPago;
+import com.DulceAromaGrupo8.DulceAromaGrupo8.enums.FormaPago;
 
-import java.text.Normalizer;
 import java.time.LocalDate;
 
 public class Factura {

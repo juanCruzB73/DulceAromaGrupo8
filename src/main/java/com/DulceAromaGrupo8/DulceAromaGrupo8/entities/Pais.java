@@ -1,12 +1,20 @@
 package com.DulceAromaGrupo8.DulceAromaGrupo8.entities;
 
-public class Pais {
-    private String nombre;
-    public Pais(String nombre){
-        this.nombre=nombre;
-    }
+import jakarta.persistence.*;
+import lombok.*;
 
-    public String getNombre() {
-        return nombre;
-    }
+@Entity
+@Table(name = "Pais")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
+@Builder
+public class Pais {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String nombre;
+
 }

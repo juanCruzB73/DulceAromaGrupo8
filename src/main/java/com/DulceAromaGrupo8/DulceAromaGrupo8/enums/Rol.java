@@ -1,4 +1,4 @@
-package com.DulceAromaGrupo8.DulceAromaGrupo8.entities.enums;
+package com.DulceAromaGrupo8.DulceAromaGrupo8.enums;
 
 public enum Rol {
 
