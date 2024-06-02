@@ -18,7 +18,6 @@ import java.util.List;
 @NoArgsConstructor
 @SuperBuilder
 
-
 public class Articulo extends Base {
 
     @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)

@@ -1,12 +1,24 @@
 package com.DulceAromaGrupo8.DulceAromaGrupo8.entities;
 
-public class Localidad {
-    private String nombre;
-    public Localidad(String nombre){
-        this.nombre=nombre;
-    }
+import jakarta.persistence.*;
+import lombok.*;
 
-    public String getNombre() {
-        return nombre;
-    }
+@Entity
+@Table(name = "Localidad")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
+@Builder
+public class Localidad {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String nombre;
+
+    @ManyToOne
+    private Provincia provincia;
+
+
 }

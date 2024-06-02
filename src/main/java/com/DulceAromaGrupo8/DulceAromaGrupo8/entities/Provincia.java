@@ -1,12 +1,24 @@
 package com.DulceAromaGrupo8.DulceAromaGrupo8.entities;
 
-public class Provincia {
-    private String nombre;
-    public Provincia(String nombre){
-        this.nombre=nombre;
-    }
+import jakarta.persistence.*;
+import lombok.*;
 
-    public String getNombre() {
-        return nombre;
-    }
+@Entity
+@Table(name = "Provincia")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
+@Builder
+public class Provincia {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String nombre;
+
+    @ManyToOne
+    private Pais pais;
+
 }

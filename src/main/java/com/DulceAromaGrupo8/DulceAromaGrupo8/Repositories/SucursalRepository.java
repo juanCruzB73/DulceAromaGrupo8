@@ -1,10 +1,9 @@
 package com.DulceAromaGrupo8.DulceAromaGrupo8.repositories;
 
-
-import com.DulceAromaGrupo8.DulceAromaGrupo8.entities.Articulo;
+import com.DulceAromaGrupo8.DulceAromaGrupo8.entities.Sucursal;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ArticuloRepository extends JpaRepository<Articulo,Long> {
+public interface SucursalRepository extends JpaRepository<Sucursal, Long> {
 }

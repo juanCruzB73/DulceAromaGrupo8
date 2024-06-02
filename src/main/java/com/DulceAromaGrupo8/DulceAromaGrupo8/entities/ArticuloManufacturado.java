@@ -13,6 +13,8 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
+@Getter
+@Setter
 
 public class ArticuloManufacturado extends Articulo {
 
