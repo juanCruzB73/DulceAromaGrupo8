@@ -12,13 +12,11 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "categorias")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
-@Audited
-
+@ToString
 
 public class Categoria {
     @Id

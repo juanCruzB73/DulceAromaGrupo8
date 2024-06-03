@@ -41,7 +41,7 @@ public class Sucursal implements Serializable {
     @ManyToMany(mappedBy = "sucursales")
     private List<Promocion> promociones;
 
-    @OneToMany(mappedBy = "sucursal_empleados")
+    @OneToMany(mappedBy = "sucursal",cascade = CascadeType.REFRESH,fetch = FetchType.LAZY)
     @Builder.Default
     private Set<Empleado> empleados = new HashSet<>();
 

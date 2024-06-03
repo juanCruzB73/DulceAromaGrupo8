@@ -2,6 +2,7 @@ package com.DulceAromaGrupo8.DulceAromaGrupo8.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,9 +12,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
-@Getter
-@Builder
+@SuperBuilder
 public class Domicilio {
 
     @Id
@@ -26,8 +25,7 @@ public class Domicilio {
     @Column(name = "codigo_postal")
     private Integer cp;
 
-    @ManyToMany(mappedBy = "domicilio")
-    @JoinColumn(name = "cliente_id")// Esto es opcional pero recomendable para definir la columna en la tabla.
+    @ManyToMany
     private Set<Cliente> clientes = new HashSet<>();
 
     @ManyToOne

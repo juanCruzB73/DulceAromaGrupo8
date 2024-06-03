@@ -2,18 +2,18 @@ package com.DulceAromaGrupo8.DulceAromaGrupo8.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
-@Table(name = "Cliente")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
-@Getter
-@Builder
+@SuperBuilder
 public class Cliente {
 
     @Id
@@ -31,16 +31,13 @@ public class Cliente {
     @Column(name = "fechaNacimiento")
     private LocalDate fechaNacimiento;
 
-    @OneToMany(mappedBy = "cliente")
-    private List<Domicilio> domicilios;
-
     @OneToOne
     private UsuarioCliente usuarioCliente;
 
-    public Cliente(String nombre, String apellido, String telefono, String email) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.telefono = telefono;
-        this.email = email;
-    }
+    @OneToOne
+    private ImagenCliente imagenCliente;
+
+    @ManyToMany
+    @Builder.Default
+    private Set<Domicilio> domicilios = new HashSet<>();
 }
