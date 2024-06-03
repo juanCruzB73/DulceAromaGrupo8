@@ -16,16 +16,17 @@ public class Domicilio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Getter
+
     private String calle;
-    @Getter
     private Integer numero;
-    @Getter
 
     @Column(name = "codigo_postal")
     private Integer cp;
 
     @ManyToOne
-    private Localidad localidad;
+    @JoinColumn(name = "cliente_id") // Esto es opcional pero recomendable para definir la columna en la tabla.
+    private Cliente cliente;
 
+    @ManyToOne
+    private Localidad localidad;
 }
