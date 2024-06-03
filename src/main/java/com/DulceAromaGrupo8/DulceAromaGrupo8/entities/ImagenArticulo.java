@@ -8,12 +8,13 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "imagen")
+@Table(name = "imagen_articulo")
 
 public class ImagenArticulo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "denominacion")
     private String denominacion;
 }
