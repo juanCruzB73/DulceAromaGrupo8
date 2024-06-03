@@ -32,4 +32,8 @@ public class Categoria {
     @Builder.Default
     private Set<Categoria>categorias = new HashSet<>();
 
+    @ManyToMany(mappedBy = "categorias")
+    @Builder.Default
+    private Set<Sucursal> sucursales = new HashSet<>();
+
 }

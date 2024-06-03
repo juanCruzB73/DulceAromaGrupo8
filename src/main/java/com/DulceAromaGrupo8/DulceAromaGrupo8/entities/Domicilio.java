@@ -3,6 +3,9 @@ package com.DulceAromaGrupo8.DulceAromaGrupo8.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "Domicilio")
 @Data
@@ -23,9 +26,9 @@ public class Domicilio {
     @Column(name = "codigo_postal")
     private Integer cp;
 
-    @ManyToOne
-    @JoinColumn(name = "cliente_id") // Esto es opcional pero recomendable para definir la columna en la tabla.
-    private Cliente cliente;
+    @ManyToMany(mappedBy = "domicilio")
+    @JoinColumn(name = "cliente_id")// Esto es opcional pero recomendable para definir la columna en la tabla.
+    private Set<Cliente> clientes = new HashSet<>();
 
     @ManyToOne
     private Localidad localidad;

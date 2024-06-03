@@ -5,9 +5,13 @@ import com.DulceAromaGrupo8.DulceAromaGrupo8.enums.FormaPago;
 import com.DulceAromaGrupo8.DulceAromaGrupo8.enums.TipoEnvio;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.engine.internal.Cascade;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "Pedido")
@@ -46,5 +50,10 @@ public class Pedido {
     private Sucursal sucursal;
     @ManyToOne
     private Cliente cliente;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @Builder.Default
+    private Set<DetallePedido> detallePedidoSet = new HashSet<>();
+
 
 }

@@ -5,7 +5,9 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "Sucursal")
@@ -38,4 +40,17 @@ public class Sucursal implements Serializable {
 
     @ManyToMany(mappedBy = "sucursales")
     private List<Promocion> promociones;
+
+    @OneToMany(mappedBy = "sucursal_empleados")
+    @Builder.Default
+    private Set<Empleado> empleados = new HashSet<>();
+
+    @ManyToMany
+    @Builder.Default
+    private Set<Categoria>categorias = new HashSet<>();
+
+    @OneToMany
+    @Builder.Default
+    private Set<Pedido> pedido = new HashSet<>();
+
 }
