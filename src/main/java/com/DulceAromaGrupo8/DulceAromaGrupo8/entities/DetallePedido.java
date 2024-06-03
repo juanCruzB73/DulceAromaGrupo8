@@ -7,13 +7,16 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name = "detalles")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
 
-public class DetallePedido extends Base {
+public class DetallePedido {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
     Articulo articulo;

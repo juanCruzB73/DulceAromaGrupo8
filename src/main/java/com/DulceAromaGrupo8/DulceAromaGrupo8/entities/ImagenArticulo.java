@@ -10,6 +10,10 @@ import lombok.Data;
 @Data
 @Table(name = "imagen")
 
-public class ImagenArticulo extends Base{
+public class ImagenArticulo {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String denominacion;
 }

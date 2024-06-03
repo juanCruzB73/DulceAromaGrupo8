@@ -8,13 +8,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "articulosManufacturados")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
-@Getter
-@Setter
 
 public class ArticuloManufacturado extends Articulo {
 
@@ -22,9 +19,14 @@ public class ArticuloManufacturado extends Articulo {
     private int tiempoEstimadoMinutos;
     private String preparacion;
 
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
+
+    /*
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "articulos_manufacturados_id")
     @Builder.Default
-    private Set<ArticuloManufacturadoDetalle> articuloManufacturadoDetalles = new HashSet<>();
-
+    private Set<ArticuloManufacturadoDetalle> articulosManufacturadosDetalle = new HashSet<>();
+    */
 }

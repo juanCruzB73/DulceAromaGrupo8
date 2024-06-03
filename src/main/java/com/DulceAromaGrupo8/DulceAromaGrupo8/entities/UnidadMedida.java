@@ -8,13 +8,17 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name = "Medidas")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
 
-public class UnidadMedida extends Base{
+public class UnidadMedida {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String denominacion;
 
 

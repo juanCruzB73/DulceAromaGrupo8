@@ -5,17 +5,21 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name = "detalles")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
 
-public class ArticuloManufacturadoDetalle extends Base {
+public class ArticuloManufacturadoDetalle {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+
+    private Integer cantidad;
 
     @ManyToOne
     private ArticuloInsumo articuloInsumo;
 
-    @Column(name = "cantidad")
-    private int cantidad;
+
 }
