@@ -7,6 +7,8 @@ import lombok.*;
 @Table(name = "Usuario_Cliente")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+
 @Setter
 @Getter
 public class UsuarioCliente {
@@ -15,14 +17,10 @@ public class UsuarioCliente {
     private Long id;
     private String auth0rId;
     private String username;
+
     public UsuarioCliente(String auth0rId,String username) {
         this.auth0rId = auth0rId;
-        this.username = auth0rId;
+        this.username = username;
     }
-        public String getAuth0rId() {
-            return auth0rId;
-        }
-        public String getUsername() {
-            return username;
-        }
-    }
+
+}

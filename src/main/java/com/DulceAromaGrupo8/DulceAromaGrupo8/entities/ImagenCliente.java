@@ -12,7 +12,7 @@ public class ImagenCliente {
     private Long id;
     @Column(name = "denominacion")
     private String denominacion;
-    public ImagenCliente(String denominacion){
+    public ImagenCliente(){
         this.denominacion=denominacion;
     }
 

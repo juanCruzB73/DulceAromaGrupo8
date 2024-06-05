@@ -32,6 +32,8 @@ public class Sucursal implements Serializable {
     private LocalTime horarioCierre;
     private boolean casaMatriz;
 
+
+
     @OneToOne
     private Domicilio domicilio;
 
@@ -53,4 +55,12 @@ public class Sucursal implements Serializable {
     @Builder.Default
     private Set<Pedido> pedido = new HashSet<>();
 
+    public void setHorarioApertura(int hora, int minuto) {
+        this.horarioApertura = LocalTime.of(hora, minuto);
+
+    }
+
+    public void setHorarioCierre(int hora, int minuto) {
+        this.horarioCierre = LocalTime.of(hora, minuto);
+}
 }

@@ -1,15 +1,13 @@
 package com.DulceAromaGrupo8.DulceAromaGrupo8.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "Usuario_Empleado")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Setter
 @Getter
 public class UsuarioEmpleado {
@@ -18,16 +16,11 @@ public class UsuarioEmpleado {
     private Long id;
     private String auth0rId;
     private String username;
-    public UsuarioEmpleado(String auth0rId,String username){
-        this.auth0rId=auth0rId;
-        this.username=auth0rId;
+
+    public UsuarioEmpleado(String auth0rId, String username) {
+        this.auth0rId = auth0rId;
+        this.username = username;
     }
 
-    public String getAuth0rId() {
-        return auth0rId;
-    }
 
-    public String getUsername() {
-        return username;
-    }
 }
