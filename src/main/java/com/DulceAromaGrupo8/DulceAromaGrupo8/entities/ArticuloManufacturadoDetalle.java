@@ -21,5 +21,8 @@ public class ArticuloManufacturadoDetalle {
     @ManyToOne
     private ArticuloInsumo articuloInsumo;
 
+    @ManyToOne
+    private ArticuloManufacturado articuloManufacturado;
+
 
 }

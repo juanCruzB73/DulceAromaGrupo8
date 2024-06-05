@@ -24,11 +24,8 @@ public class Categoria {
     private Long id;
 
     private String denominacion;
+    private boolean esInsumo;
 
-    @OneToMany
-    @JoinColumn(name = "categoria_id")
-    @Builder.Default
-    private Set<Categoria>categorias = new HashSet<>();
 
     @ManyToMany(mappedBy = "categorias")
     @Builder.Default

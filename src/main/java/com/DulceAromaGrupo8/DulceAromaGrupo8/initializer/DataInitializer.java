@@ -94,6 +94,7 @@ public class DataInitializer implements CommandLineRunner {
         // Categoria
         Categoria categoria = new Categoria();
         categoria.setDenominacion("Postres");
+        categoria.setEsInsumo(true);
         categoriaRepository.save(categoria);
 
 
@@ -104,9 +105,15 @@ public class DataInitializer implements CommandLineRunner {
         manufacturado.setDescripcion("Deliciosa tarta de manzana casera");
         manufacturado.setTiempoEstimadoMinutos(60);
         manufacturado.setPreparacion("Preparar la masa, cortar las manzanas...");
-        manufacturado.setCategoria(categoria);
         manufacturado.setUnidadMedida(unidadMedida);
         articuloManufacturadoRepository.save(manufacturado);
+
+        ArticuloManufacturadoDetalle detalle1 = ArticuloManufacturadoDetalle.builder()
+                .cantidad(2)
+                .articuloInsumo(insumo)
+                .articuloManufacturado(manufacturado)
+                .build();
+        articuloManufacturadoDetalleRepository.save(detalle1);
 
         // Cliente
         Cliente cliente = new Cliente();
@@ -124,6 +131,11 @@ public class DataInitializer implements CommandLineRunner {
         domicilio.setCp(5000);
         domicilioRepository.save(domicilio);
 
+        // Agregar domicilios al cliente
+        Set<Domicilio> domicilios = new HashSet<>();
+        domicilios.add(domicilio);
+        cliente.setDomicilios(domicilios);
+        clienteRepository.save(cliente);
         // Empleado
         Empleado empleado = new Empleado();
         empleado.setNombre("Carlos");
@@ -160,7 +172,6 @@ public class DataInitializer implements CommandLineRunner {
         ImagenCliente imagenCliente = new ImagenCliente();
         imagenCliente.setDenominacion("cliente1.jpg");
         imagenClienteRepository.save(imagenCliente);
-
         // ImagenEmpleado
         ImagenEmpleado imagenEmpleado = new ImagenEmpleado();
         imagenEmpleado.setDenominacion("empleado1.jpg");
@@ -181,6 +192,13 @@ public class DataInitializer implements CommandLineRunner {
         pais.setNombre("Argentina");
         paisRepository.save(pais);
 
+        // Crear instancia de DetallePedido
+        DetallePedido detallePedido = new DetallePedido();
+        detallePedido.setCantidad(2); // Establecer la cantidad
+        detallePedido.setSubTotal(50.0); // Establecer el subtotal
+        Articulo articulo = articuloRepository.findById(1L).orElse(null);
+        detallePedido.setArticulo(articulo);
+
         // Pedido
         Pedido pedido = new Pedido();
         pedido.setHoraEstimadaFinalizacion(LocalTime.of(14, 30));
@@ -195,8 +213,10 @@ public class DataInitializer implements CommandLineRunner {
         pedido.setDomicilio(domicilio);
         pedido.setSucursal(null);  // Asignar sucursal apropiada
         pedido.setCliente(cliente);
+        pedido.getDetallePedidoSet().add(detallePedido);
         pedidoRepository.save(pedido);
 
+        
         // Promocion
         Promocion promocion = new Promocion();
         promocion.setDenominacion("Promo Verano");
@@ -214,12 +234,14 @@ public class DataInitializer implements CommandLineRunner {
         sucursal.setHorarioApertura(10,00);
         sucursal.setHorarioCierre(23,00);
         sucursal.setDomicilio(domicilio);
+        pedido.setSucursal(sucursal);
         sucursalRepository.save(sucursal);
 
 
         // UsuarioCliente
         UsuarioCliente usuarioCliente = new UsuarioCliente("auth0|123456", "juanperez");
         usuarioClienteRepository.save(usuarioCliente);
+
 
         // UsuarioEmpleado
         UsuarioEmpleado usuarioEmpleado = new UsuarioEmpleado("auth0|789012", "carlosgomez");
