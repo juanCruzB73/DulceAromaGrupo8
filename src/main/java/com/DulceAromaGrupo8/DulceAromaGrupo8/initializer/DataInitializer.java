@@ -75,7 +75,6 @@ public class DataInitializer implements CommandLineRunner {
     public void run(String... args) throws Exception {
         // Ejemplo de precarga de datos para cada entidad
 
-
         // UnidadMedida
         UnidadMedida unidadMedida = new UnidadMedida();
         unidadMedida.setDenominacion("Kilogramo");
@@ -172,6 +171,12 @@ public class DataInitializer implements CommandLineRunner {
         ImagenEmpleado imagenEmpleado = new ImagenEmpleado();
         imagenEmpleado.setDenominacion("empleado1.jpg");
         imagenEmpleadoRepository.save(imagenEmpleado);
+        // Empresa
+        Empresa empresa = new Empresa();
+        empresa.setNombre("Dulce Aroma S.A.");
+        empresa.setRazonSocial("Dulce Aroma Sociedad Anónima");
+        empresa.setCuil(307080123);
+        empresaRepository.save(empresa);
 
         // Sucursal
         Sucursal sucursal = new Sucursal();
@@ -179,13 +184,19 @@ public class DataInitializer implements CommandLineRunner {
         sucursal.setCasaMatriz(true);
         sucursal.setHorarioApertura(10,00);
         sucursal.setHorarioCierre(23,00);
+        sucursal.setEmpresa(empresa);
         sucursal.setDomicilio(domicilio);
+        // Establecer la relación many-to-many
+        sucursal.getCategorias().add(categoria);
+        categoria.getSucursales().add(sucursal);
+        // Guardar las entidades para que se actualice la tabla de unión
+        sucursalRepository.save(sucursal);
+        categoriaRepository.save(categoria);
         sucursalRepository.save(sucursal);
 
         // UsuarioEmpleado
         UsuarioEmpleado usuarioEmpleado = new UsuarioEmpleado("auth0|789012", "carlosgomez");
         usuarioEmpleadoRepository.save(usuarioEmpleado);
-
 
 
         // Empleado
@@ -199,14 +210,6 @@ public class DataInitializer implements CommandLineRunner {
         empleado.setSucursal(sucursal);
         empleado.setUsuarioEmpleado(usuarioEmpleado);
         empleadoRepository.save(empleado);
-
-
-        // Empresa
-        Empresa empresa = new Empresa();
-        empresa.setNombre("Dulce Aroma S.A.");
-        empresa.setRazonSocial("Dulce Aroma Sociedad Anónima");
-        empresa.setCuil(307080123);
-        empresaRepository.save(empresa);
 
         // Factura
         Factura factura = new Factura();
@@ -263,14 +266,28 @@ public class DataInitializer implements CommandLineRunner {
         promocion.setHoraHasta(22,00);
         promocion.setTipoPromocion(TipoPromocion.PROMOCION);
         promocion.setPrecioPromocional(20.0);
+        sucursal.getPromociones().add(promocion);
+        promocion.getSucursales().add(sucursal);
+        sucursalRepository.save(sucursal);
         promocionRepository.save(promocion);
-
 
         // ImagenPromocion
         ImagenPromocion imagenPromocion = new ImagenPromocion();
         imagenPromocion.setDenominacion("promo1.jpg");
         imagenPromocion.setPromocion(promocion);
         imagenPromocionRepository.save(imagenPromocion);
+
+        PromocionDetalle promocionDetalle = new PromocionDetalle();
+        promocionDetalle.setCantidad(5);
+        promocionDetalle.setPromocion(promocion);
+
+        // Agregar el detalle a la promoción
+        promocion.getDetalles().add(promocionDetalle);
+
+        // Guardar la promoción (los detalles se guardan en cascada)
+        promocionRepository.save(promocion);
+
+
 
 
     }

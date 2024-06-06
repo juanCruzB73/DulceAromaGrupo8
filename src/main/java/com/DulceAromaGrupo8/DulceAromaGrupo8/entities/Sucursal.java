@@ -5,13 +5,13 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "Sucursal")
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
@@ -40,20 +40,28 @@ public class Sucursal implements Serializable {
     @ManyToOne
     private Empresa empresa;
 
-    @ManyToMany(mappedBy = "sucursales")
-    private List<Promocion> promociones;
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            joinColumns = { @JoinColumn(name = "sucursal_id") },
+            inverseJoinColumns = { @JoinColumn(name = "promocion_id") }
+    )
+    private Set<Promocion> promociones = new HashSet<>();
 
     @OneToMany(mappedBy = "sucursal",cascade = CascadeType.REFRESH,fetch = FetchType.LAZY)
     @Builder.Default
     private Set<Empleado> empleados = new HashSet<>();
 
     @ManyToMany
+    @JoinTable(
+            joinColumns = @JoinColumn(name = "sucursales_id"),
+            inverseJoinColumns = @JoinColumn(name = "categorias_id")
+    )
     @Builder.Default
-    private Set<Categoria>categorias = new HashSet<>();
+    private Set<Categoria> categorias = new HashSet<>();
 
-    @OneToMany
-    @Builder.Default
-    private Set<Pedido> pedido = new HashSet<>();
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "sucursal_id") // nombre de la columna que hace referencia a la sucursal en la tabla Pedido
+    private List<Pedido> pedidos = new ArrayList<>();
 
     public void setHorarioApertura(int hora, int minuto) {
         this.horarioApertura = LocalTime.of(hora, minuto);

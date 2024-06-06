@@ -12,9 +12,10 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 @SuperBuilder
 @ToString
 
@@ -27,7 +28,11 @@ public class Categoria {
     private boolean esInsumo;
 
 
-    @ManyToMany(mappedBy = "categorias")
+    @ManyToMany
+    @JoinTable(
+            joinColumns = @JoinColumn(name = "categorias_id"),
+            inverseJoinColumns = @JoinColumn(name = "sucursales_id")
+    )
     @Builder.Default
     private Set<Sucursal> sucursales = new HashSet<>();
 

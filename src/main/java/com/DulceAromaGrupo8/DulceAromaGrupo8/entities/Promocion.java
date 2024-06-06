@@ -6,12 +6,13 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
 @Table(name = "Promocion")
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
@@ -38,13 +39,9 @@ public class Promocion {
     @Column(name = "tipo_promocion")
     private TipoPromocion tipoPromocion; //enums
 
-    @ManyToMany
-    @JoinTable(
-            name = "sucursal_promocion",
-            joinColumns = @JoinColumn(name = "promocion_id"),
-            inverseJoinColumns = @JoinColumn(name = "sucursal_id")
-    )
-    private List<Sucursal> sucursales;
+    @ManyToMany(mappedBy = "promociones")
+    private Set<Sucursal> sucursales = new HashSet<>();
+
 
     public void setHoraDesde(int hora, int minutos){
         this.HoraDesde = LocalTime.of(hora, minutos);
@@ -53,4 +50,7 @@ public class Promocion {
     public void setHoraHasta( int hora, int minutos){
       this.HoraHasta = LocalTime.of(hora, minutos);
     }
+    @OneToMany(mappedBy = "promocion", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<PromocionDetalle> detalles = new HashSet<>();
+
 }

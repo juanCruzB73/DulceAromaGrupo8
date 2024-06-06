@@ -5,7 +5,6 @@ import lombok.*;
 
 @Entity
 @Table(name = "Promocion_Detalle")
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
