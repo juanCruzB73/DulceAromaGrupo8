@@ -25,7 +25,7 @@ public class Domicilio {
     @Column(name = "codigo_postal")
     private Integer cp;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "domicilios")
     private Set<Cliente> clientes = new HashSet<>();
 
     @ManyToOne

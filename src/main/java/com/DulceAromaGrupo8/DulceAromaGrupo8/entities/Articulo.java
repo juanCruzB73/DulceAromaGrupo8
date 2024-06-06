@@ -5,7 +5,9 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -22,13 +24,8 @@ public class Articulo {
     protected String denominacion;
     protected double precioVenta;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-
-    @JoinColumn(name = "articulos_id")
-
-    @Builder.Default
-
-    protected List<ImagenArticulo> imagenArticulos = new ArrayList<>();
+    @OneToMany(mappedBy = "articulo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<ImagenArticulo> imagenes = new HashSet<>();
 
     @ManyToOne
     protected UnidadMedida unidadMedida;

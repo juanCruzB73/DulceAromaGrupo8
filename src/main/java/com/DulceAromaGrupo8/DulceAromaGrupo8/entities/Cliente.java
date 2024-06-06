@@ -38,6 +38,12 @@ public class Cliente {
     private ImagenCliente imagenCliente;
 
     @ManyToMany
+    @JoinTable(
+            name = "DOMICILIO_CLIENTES",
+            joinColumns = @JoinColumn(name = "CLIENTES_ID"),
+            inverseJoinColumns = @JoinColumn(name = "DOMICILIO_ID")
+    )
     @Builder.Default
     private Set<Domicilio> domicilios = new HashSet<>();
+
 }

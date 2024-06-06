@@ -33,5 +33,5 @@ public class Empleado {
     private ImagenEmpleado imgenEmpleado;
     @OneToOne
     private UsuarioEmpleado usuarioEmpleado;
-    //private Rol rol;
+
 }

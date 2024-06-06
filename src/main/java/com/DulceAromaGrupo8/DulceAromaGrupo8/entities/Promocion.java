@@ -45,4 +45,12 @@ public class Promocion {
             inverseJoinColumns = @JoinColumn(name = "sucursal_id")
     )
     private List<Sucursal> sucursales;
+
+    public void setHoraDesde(int hora, int minutos){
+        this.HoraDesde = LocalTime.of(hora, minutos);
+    }
+
+    public void setHoraHasta( int hora, int minutos){
+      this.HoraHasta = LocalTime.of(hora, minutos);
+    }
 }

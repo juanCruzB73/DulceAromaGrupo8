@@ -17,4 +17,8 @@ public class ImagenArticulo {
 
     @Column(name = "denominacion")
     private String denominacion;
+
+    @ManyToOne
+    @JoinColumn(name = "articulos_id")
+    private Articulo articulo;
 }

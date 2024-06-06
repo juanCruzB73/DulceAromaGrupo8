@@ -75,6 +75,7 @@ public class DataInitializer implements CommandLineRunner {
     public void run(String... args) throws Exception {
         // Ejemplo de precarga de datos para cada entidad
 
+
         // UnidadMedida
         UnidadMedida unidadMedida = new UnidadMedida();
         unidadMedida.setDenominacion("Kilogramo");
@@ -115,6 +116,27 @@ public class DataInitializer implements CommandLineRunner {
                 .build();
         articuloManufacturadoDetalleRepository.save(detalle1);
 
+        // Pais
+        Pais pais = new Pais();
+        pais.setNombre("Argentina");
+        paisRepository.save(pais);
+
+        // Crear y guardar una provincia asociada al país
+        Provincia provincia = new Provincia();
+        provincia.setNombre("Mendoza");
+        provincia.setPais(pais);
+        provinciaRepository.save(provincia);
+
+
+        // ImagenCliente
+        ImagenCliente imagenCliente = new ImagenCliente();
+        imagenCliente.setDenominacion("cliente1.jpg");
+        imagenClienteRepository.save(imagenCliente);
+
+        // UsuarioCliente
+        UsuarioCliente usuarioCliente = new UsuarioCliente("auth0|123456", "juanperez");
+        usuarioClienteRepository.save(usuarioCliente);
+
         // Cliente
         Cliente cliente = new Cliente();
         cliente.setNombre("Juan");
@@ -122,13 +144,22 @@ public class DataInitializer implements CommandLineRunner {
         cliente.setTelefono("123456789");
         cliente.setEmail("juan.perez@example.com");
         cliente.setFechaNacimiento(LocalDate.of(1990, 1, 1));
+        cliente.setImagenCliente(imagenCliente);
+        cliente.setUsuarioCliente(usuarioCliente);
         clienteRepository.save(cliente);
+
+        // Localidad
+        Localidad localidad = new Localidad();
+        localidad.setNombre("Guaymallen-San_Jose");
+        localidad.setProvincia(provincia);
+        localidadRepository.save(localidad);
 
         // Domicilio
         Domicilio domicilio = new Domicilio();
         domicilio.setCalle("Calle Falsa");
         domicilio.setNumero(123);
         domicilio.setCp(5000);
+        domicilio.setLocalidad(localidad);
         domicilioRepository.save(domicilio);
 
         // Agregar domicilios al cliente
@@ -136,6 +167,27 @@ public class DataInitializer implements CommandLineRunner {
         domicilios.add(domicilio);
         cliente.setDomicilios(domicilios);
         clienteRepository.save(cliente);
+
+        // ImagenEmpleado
+        ImagenEmpleado imagenEmpleado = new ImagenEmpleado();
+        imagenEmpleado.setDenominacion("empleado1.jpg");
+        imagenEmpleadoRepository.save(imagenEmpleado);
+
+        // Sucursal
+        Sucursal sucursal = new Sucursal();
+        sucursal.setNombre("Sucursal Centro");
+        sucursal.setCasaMatriz(true);
+        sucursal.setHorarioApertura(10,00);
+        sucursal.setHorarioCierre(23,00);
+        sucursal.setDomicilio(domicilio);
+        sucursalRepository.save(sucursal);
+
+        // UsuarioEmpleado
+        UsuarioEmpleado usuarioEmpleado = new UsuarioEmpleado("auth0|789012", "carlosgomez");
+        usuarioEmpleadoRepository.save(usuarioEmpleado);
+
+
+
         // Empleado
         Empleado empleado = new Empleado();
         empleado.setNombre("Carlos");
@@ -143,7 +195,11 @@ public class DataInitializer implements CommandLineRunner {
         empleado.setTelefono("987654321");
         empleado.setEmail("carlos.gomez@example.com");
         empleado.setFechaNacimiento(LocalDate.of(1985, 5, 15));
+        empleado.setImgenEmpleado(imagenEmpleado);
+        empleado.setSucursal(sucursal);
+        empleado.setUsuarioEmpleado(usuarioEmpleado);
         empleadoRepository.save(empleado);
+
 
         // Empresa
         Empresa empresa = new Empresa();
@@ -166,31 +222,11 @@ public class DataInitializer implements CommandLineRunner {
         // ImagenArticulo
         ImagenArticulo imagenArticulo = new ImagenArticulo();
         imagenArticulo.setDenominacion("imagen1.jpg");
+        imagenArticulo.setArticulo(insumo);
         imagenArticuloRepository.save(imagenArticulo);
 
-        // ImagenCliente
-        ImagenCliente imagenCliente = new ImagenCliente();
-        imagenCliente.setDenominacion("cliente1.jpg");
-        imagenClienteRepository.save(imagenCliente);
-        // ImagenEmpleado
-        ImagenEmpleado imagenEmpleado = new ImagenEmpleado();
-        imagenEmpleado.setDenominacion("empleado1.jpg");
-        imagenEmpleadoRepository.save(imagenEmpleado);
 
-        // ImagenPromocion
-        ImagenPromocion imagenPromocion = new ImagenPromocion();
-        imagenPromocion.setDenominacion("promo1.jpg");
-        imagenPromocionRepository.save(imagenPromocion);
 
-        // Localidad
-        Localidad localidad = new Localidad();
-        localidad.setNombre("Córdoba");
-        localidadRepository.save(localidad);
-
-        // Pais
-        Pais pais = new Pais();
-        pais.setNombre("Argentina");
-        paisRepository.save(pais);
 
         // Crear instancia de DetallePedido
         DetallePedido detallePedido = new DetallePedido();
@@ -211,40 +247,31 @@ public class DataInitializer implements CommandLineRunner {
         pedido.setFactura(factura);
         pedido.setEmpleado(empleado);
         pedido.setDomicilio(domicilio);
-        pedido.setSucursal(null);  // Asignar sucursal apropiada
+        pedido.setSucursal(sucursal);  // Asignar sucursal apropiada
         pedido.setCliente(cliente);
         pedido.getDetallePedidoSet().add(detallePedido);
         pedidoRepository.save(pedido);
 
-        
+
         // Promocion
         Promocion promocion = new Promocion();
         promocion.setDenominacion("Promo Verano");
         promocion.setDescripcionDescuento("Descuento del 20% en postres de verano");
         promocion.setFechaDesde(LocalDate.of(2023, 1, 1));
         promocion.setFechaHasta(LocalDate.of(2023, 3, 31));
+        promocion.setHoraDesde(14,0);
+        promocion.setHoraHasta(22,00);
         promocion.setTipoPromocion(TipoPromocion.PROMOCION);
         promocion.setPrecioPromocional(20.0);
         promocionRepository.save(promocion);
 
-        // Sucursal
-        Sucursal sucursal = new Sucursal();
-        sucursal.setNombre("Sucursal Centro");
-        sucursal.setCasaMatriz(true);
-        sucursal.setHorarioApertura(10,00);
-        sucursal.setHorarioCierre(23,00);
-        sucursal.setDomicilio(domicilio);
-        pedido.setSucursal(sucursal);
-        sucursalRepository.save(sucursal);
+
+        // ImagenPromocion
+        ImagenPromocion imagenPromocion = new ImagenPromocion();
+        imagenPromocion.setDenominacion("promo1.jpg");
+        imagenPromocion.setPromocion(promocion);
+        imagenPromocionRepository.save(imagenPromocion);
 
 
-        // UsuarioCliente
-        UsuarioCliente usuarioCliente = new UsuarioCliente("auth0|123456", "juanperez");
-        usuarioClienteRepository.save(usuarioCliente);
-
-
-        // UsuarioEmpleado
-        UsuarioEmpleado usuarioEmpleado = new UsuarioEmpleado("auth0|789012", "carlosgomez");
-        usuarioEmpleadoRepository.save(usuarioEmpleado);
     }
 }

@@ -19,9 +19,7 @@ public class ArticuloManufacturado extends Articulo {
     private int tiempoEstimadoMinutos;
     private String preparacion;
 
-    @ManyToOne
-    @JoinColumn(name = "categoria_id")
-    private Categoria categoria;
+
 
     /*
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
